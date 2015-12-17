@@ -1,0 +1,136 @@
+
+/*BEGIN GAME*/
+
+.container-fluid{
+    padding-top: 85px;
+}
+
+h1{
+  font-size: 48px;
+  text-align: center;
+}
+
+td{
+  border: solid black;
+  height: 30px;
+  width: 30px;
+}
+
+#start:hover{
+  color: red;
+}
+
+#sugg:hover{
+  color: red;
+}
+
+.modal-body{
+  background: url('http://megandalbey.com/codepen/css-selectors/paper.jpg') #f2f1e3;
+}
+
+.modal-header{
+  background:url('http://megandalbey.com/codepen/css-selectors/purplewood.jpg') #432d3e;
+  color: white;
+}
+
+#gameLog{
+  height: 345px;
+  width: 400px;
+  border: solid brown; 
+  color: white; 
+  padding: 15px;
+  background-color: black; 
+  overflow: scroll;
+}
+
+#suggestion{
+  height: 345px;
+  width: 400px;   
+  overflow: scroll;
+}
+
+.diceface{
+  font-size: 180px;
+  line-height: .80;
+}
+
+#clueRoom{
+  display: none;
+  height: 740px;
+  width: 740px; 
+  position: absolute;
+  border: 1px solid white; 
+}
+
+#card{
+  height: 380px;
+  width: 245px; 
+  border-radius: 7%;
+  background: url(img/clue/knife.jpg);
+  background-size: cover; 
+}
+
+#displayBody{
+  padding-left: 27px;
+}
+
+#myDisplayTitle{
+  color: white;
+}
+
+#roll{
+  margin-left: 10px;
+}
+
+.hallway{
+  background-color: lightyellow; 
+}
+
+.room{
+  background-color: green; 
+}
+
+.secret{
+  background-color: pink; 
+}
+
+.gameBorder{
+  opacity: 0;
+  border: none;
+}
+
+.doors{
+  background-color: #ADD8E6; 
+}
+
+.start{
+  background-color: brown;
+}
+
+.activePlayer{
+  /*background-color: red;*/
+}
+
+.scarlet{
+  background-color: #cc0000;
+}
+
+.white{
+  background-color: lightgrey;
+}
+
+.green{
+  background-color: darkgreen;
+}
+
+.mustard{
+  background-color: #FFDB58;
+}
+
+.peacock{
+  background-color: darkblue;
+}
+
+.plum{
+  background-color: purple;
+}

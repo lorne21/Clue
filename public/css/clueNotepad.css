@@ -1,0 +1,282 @@
+/*credit to notepad to megandalbey.com*/
+
+@font-face {
+    font-family: 'Typewriter'; /*a name to be used later*/
+    src: url('/fonts/TravelingTypewriter.ttf'); /*URL to font*/
+}
+
+body {
+  /*background:url('http://megandalbey.com/codepen/css-selectors/purplewood.jpg') #432d3e;*/
+  background: url('/img/clue/stormynight2.jpg') no-repeat center; 
+  background-size: cover; 
+  font-family: 'Typewriter';
+}
+
+hr {
+  border:none;
+  border-top:1px dashed rgba(0,0,0,.2);
+}
+
+a {
+  text-decoration:none;
+  font-weight:bold;
+  color:#b620e8;
+}
+
+a:hover {
+  color:#d000ff;
+}
+
+section { 
+  display:none; 
+  min-height:410px;
+}
+section.current { display:block; }
+
+
+/* - - - - - TABS - - - - - */
+
+.tabs {
+  list-style:none;
+  position:absolute;
+  left:-32px;
+  top:120px;
+  width:50px;
+  z-index:100;
+}
+
+.tabs li {
+  font-family: 'Typewriter';
+  line-height:14px;
+  font-size:1em;
+  padding:10px;
+  text-align:right;
+  display:inline-block;
+  float:right;
+  margin-right:5px;
+  margin-bottom: -7px;
+  position:relative;
+  z-index:0;
+  border-right:none;
+  cursor:pointer;
+  
+  -webkit-box-shadow: rgba(0,0,0,0.1) -1px 0px 1px;
+  -moz-box-shadow: rgba(0,0,0,0.1) -1px 0px 1px;
+  box-shadow: rgba(0,0,0,0.1) -1px 0px 1px;
+}
+
+.tabs li:hover {
+  padding-right:11px;
+}
+
+.tabs li:nth-child(odd)  {
+  border:1px solid #bfd255;
+  background: #bfd255;
+  background: -moz-linear-gradient(top,  #bfd255 0%, #99c42d 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfd255), color-stop(100%,#99c42d));
+  background: -webkit-linear-gradient(top,  #bfd255 0%,#99c42d 100%);
+  background: -o-linear-gradient(top,  #bfd255 0%,#99c42d 100%);
+  background: -ms-linear-gradient(top,  #bfd255 0%,#99c42d 100%);
+  background: linear-gradient(to bottom,  #bfd255 0%,#99c42d 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#99c42d',GradientType=0 );
+}
+
+.tabs li:nth-child(even)  {
+  border:1px solid #d1cc55;
+  background: #d1cc55;
+  background: -moz-linear-gradient(top, #d1cc55 0%, #dbd534 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d1cc55), color-stop(100%,#dbd534));
+  background: -webkit-linear-gradient(top, #d1cc55 0%,#dbd534 100%);
+  background: -o-linear-gradient(top, #d1cc55 0%,#dbd534 100%);
+  background: -ms-linear-gradient(top, #d1cc55 0%,#dbd534 100%);
+  background: linear-gradient(to bottom, #d1cc55 0%,#dbd534 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1cc55', endColorstr='#dbd534',GradientType=0 );
+}
+
+.tabs li.current {
+  background: url('http://megandalbey.com/codepen/css-selectors/paper.jpg') #f2f1e3 !important;
+  padding:10px 15px;
+  border:1px solid #FFF;
+  border-right:none;
+  margin-right:0px;
+  z-index:1;
+}
+
+/* - - - - - H2 BRUSH STROKE - - - - - */
+
+h2 {
+  font-size:1.6em;
+  font-family: 'Typewriter';
+  margin:0px 10px -10px;
+  vertical-align:top;
+  border-top:1px dashed rgba(0,0,0,.2);
+  height:37px;
+  position:relative;
+  color:#442b4f;
+}
+
+h2:before {
+  content: url('http://megandalbey.com/codepen/css-selectors/highlight.png');
+  position:absolute;
+  display:block;
+  margin-top:-10px;
+  left:-15px;
+  -webkit-animation: brush 1s;
+  -webkit-animation-delay: 0s;
+  -webkit-animation-direction: reverse;
+  -webkit-mask-size: 295px 50px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-image: url('http://megandalbey.com/codepen/css-selectors/strokemask.png');
+  /* Mask animation unsupported by FF, and masks only supported in SVG format. */
+  }
+
+@-webkit-keyframes brush {
+  0% { -webkit-mask-position: 0 0; }
+  100% { -webkit-mask-position: 295px 0px; }
+}
+
+
+h2 + p {
+  margin-left:50px;
+  font-weight:bold;
+}
+
+/* - - - - - NOTEPAD - - - - - */
+
+.leather {  
+  background: #6b3a0d;
+  width: 447px;
+  padding:5px;
+  margin-left: 100px; 
+  border-radius:5px;
+  position:relative;
+  z-index:0;
+  display: inline-block;
+  
+  -webkit-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.6) 1px 1px 2px inset;
+  -moz-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.6) 1px 1px 2px inset;
+  box-shadow:rgba(0,0,0,0.4) 1px 1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.2) 1px 1px 2px inset;
+}
+
+.leather-stitch {
+  border:1px dashed hsla(44, 84%, 36%, .8);
+  padding:7px;
+  -webkit-box-shadow:rgba(255,255,255,0.2) 1px 1px 1px, rgba(0,0,0,0.2) -1px -1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.2) 1px 1px 2px inset;
+  -moz-box-shadow:rgba(255,255,255,0.2) 1px 1px 1px, rgba(0,0,0,0.2) -1px -1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.2) 1px 1px 2px inset;
+  box-shadow:rgba(255,255,255,0.2) 1px 1px 1px, rgba(0,0,0,0.2) -1px -1px 1px, rgba(0,0,0,0.3) -1px -1px 1px inset, rgba(255,255,255,0.2) 1px 1px 2px inset;
+}
+
+.rings {
+  margin:5px 0px -28px 0px;
+  padding:0px;
+  list-style:none;
+  position:relative;
+  z-index:10;
+}
+
+.rings li {
+  background:#442b4f;
+  display:block;
+  width:15px;
+  height:15px;
+  display:inline-block;
+  border-radius:15px;
+  margin:-1px 62px 5px;
+  
+  -webkit-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px inset, rgba(255,255,255,0.6) 1px 1px 1px;
+  -moz-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px inset, rgba(255,255,255,0.6) 1px 1px 1px;
+  box-shadow:rgba(0,0,0,0.4) 1px 1px 1px inset, rgba(255,255,255,0.6) 1px 1px 1px;
+}
+
+.rings li:before {
+  content:'';
+  display:block;
+  border-radius:15px;
+  z-index:-1;
+  position:relative;
+  
+  width:7px;
+  height:35px;
+  position:absolute;
+  z-index:10;
+  margin:-25px 0px 0px 4px;
+  
+  background: #b5bdc8;
+  background: -moz-linear-gradient(-45deg,  #b5bdc8 0%, #828c95 36%, #b5bdc8 38%, #28343b 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#b5bdc8), color-stop(36%,#828c95), color-stop(38%,#b5bdc8), color-stop(100%,#28343b));
+  background: -webkit-linear-gradient(-45deg,  #b5bdc8 0%,#828c95 36%,#b5bdc8 38%,#28343b 100%);
+  background: -o-linear-gradient(-45deg,  #b5bdc8 0%,#828c95 36%,#b5bdc8 38%,#28343b 100%);
+  background: -ms-linear-gradient(-45deg,  #b5bdc8 0%,#828c95 36%,#b5bdc8 38%,#28343b 100%);
+  background: linear-gradient(135deg,  #b5bdc8 0%,#828c95 36%,#b5bdc8 38%,#28343b 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#28343b',GradientType=1 );
+  
+  -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.4), -1px -1px 0px rgba(0,0,0,0.3) inset, 3px 1px 0px rgba(255,255,255,0.6) inset;
+  -moz-box-shadow: 1px 1px 1px rgba(0,0,0,0.4), -1px -1px 0px rgba(0,0,0,0.3) inset, 3px 1px 0px rgba(255,255,255,0.6) inset;
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.4), -1px -1px 0px rgba(0,0,0,0.3) inset, 3px 1px 0px rgba(255,255,255,0.6) inset;
+}
+
+article {
+  background:url('http://megandalbey.com/codepen/css-selectors/paper.jpg') #f2f1e3;
+  display:block;
+  position:relative;
+  padding:50px 10px 5px;
+  color:#083354;
+  border:1px solid #FFF;
+  width:420px;
+  -webkit-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px;
+  -moz-box-shadow:rgba(0,0,0,0.4) 1px 1px 1px;
+  box-shadow:rgba(0,0,0,0.4) 1px 1px 1px;
+}
+
+/* - - - - - EXAMPLES - - - - - */
+
+pre {
+  width: 92%;
+  overflow: auto;
+  margin: -10px 0px 10px;
+  padding: 10px 8px 10px 12px;
+  color: #3f3b36;
+  border: 1px solid #e9e7e0;
+  border-left: 13px solid #bce5be;
+  font: lighter 12px/20px Monaco,'MonacoRegular',monospace;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: url("http://www.megandalbey.com/codepen/css-selectors/precode.gif") repeat scroll 0 -9px;
+}
+
+pre:before {
+  content:'CSS';
+  position:absolute;
+  -webkit-transform: rotate(90deg); 
+  -moz-transform: rotate(90deg);  
+  margin:0px 0px 0px -28px;
+  color:#7bb27d;
+  font-size:9px
+}
+
+xmp {
+  width: 92%;
+  overflow: auto;
+  margin: 0px 0px 10px;
+  padding: 10px 8px 10px 12px;
+  color: #3f3b36;
+  border: 1px solid #e9e7e0;
+  border-left: 13px solid #d0e4f7;
+  font: lighter 12px/20px Monaco,'MonacoRegular',monospace;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background: url("http://www.megandalbey.com/codepen/css-selectors/precode.gif") repeat scroll 0 -9px;
+}
+
+xmp:before {
+  content:'HTML';
+  position:absolute;
+  -webkit-transform: rotate(90deg); 
+  -moz-transform: rotate(90deg);  
+  margin:3px 0px 0px -31px;
+  color:#7395b5;
+  font-size:9px
+}
+
+
+

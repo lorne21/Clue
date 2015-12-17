@@ -1,0 +1,265 @@
+<html>
+<head>
+	<title>Clue</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/clue.css">
+	<link rel="stylesheet" href="css/clueNotepad.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container-fluid"> <!--container-->
+	<div class="row"> <!--row-->
+		<div class="col-md-5"><!--col 5-->
+			<div class='leather'><div class='leather-stitch'>
+			  <ul class='rings'><li></li><li></li><li></li></ul>
+			  <ul class='tabs'>
+			    <li id='t-1' class='current'>New Game</li>
+			    <li id='t-2' class=''>Instructions</li>
+			    <li id='t-3' class=''>Roll Dice</li>
+			    <li id='t-4' class=''>Game Log</li>
+			    <li id='t-5' class=''>View Checklist</li>
+			    <li id='t-6' class=''>Make Suggestion</li>
+			    <li id='t-7' class=''>Make Accusation</li>
+			    <li id='t-8' class=''>End Turn</li>
+			    <li id='t-9' class=''>Quit</li>
+			    <li id='t-10' class=''>About</li>
+			  </ul>
+			  
+			<article>
+			  <h1>CLUE  <span><i class="fa fa-search"></i></span></h1>
+			  <section id='s-1' class='current'>
+			    <h2>Welcome to Clue!</h2>
+			    <p>This game is murder</p>
+			    
+			    <p>It is a dark and stormy night at Tudor Mansion.  While enjoying a nice game of hide and seek with some of your buddy, John Boddy's friends, the power goes out. When the lights come back on, everyone reconvenes, only John isn't around.  Everyone moves to the hallway and....John has been murdered and his body's been moved!!!! You give the shifty eye to everyone there. Someone (maybe even you) is hiding something. Not wanting to be the next victim and not trusting one another, you all spread out in search of clues.  Who did it? Where? And with what? Find out or you may be next!</p>
+			    <br>
+			    <p>Click play if you want to get started. Or, if you want to learn the rules, click the instructions tab.</p>
+			    <div id="start"><h3>PLAY</h3></div>
+			    
+			  </section>
+			  
+			  <section id='s-2'>
+			    <h2>Instructions</h2>
+			    <p>How to Play</p>
+			    
+			  </section>
+
+			  <section id='s-3'>
+			    <h2>Roll the Dice</h2>
+			    <p>Then explore the mansion</p>  
+				<span id="die1" class="diceface">&#9861;</span>
+				<span id="die2" class="diceface">&#9861;</span>
+				<br>
+				<button id="roll" class="btn btn-warning">Roll Dice</button>
+				<br>
+				<h3>Moves Available: <span id="movesAvail"><span><h3>
+			    
+			  </section>
+
+			  <section id='s-4'>
+			    <h2>Game Log</h2>
+			    <p>This tracks all of the moves in the game</p>
+			    <div id="gameLog">
+			    	<p>The Mystery Begins...</p>	
+			    </div>
+			    
+			  </section>
+			  
+			  <section id='s-5'>
+			    <h2>Case File</h2>
+			    <p>Narrow down your suspects. Click on a name to view the card</p>
+			    <div class="checklist">
+			    	<label>Suspects:</label>
+			    	<ol id="suspects"></ol>
+			    	<label>Weapons:</label>
+			    	<ol id="weapons"></ol>
+			    	<label>Rooms:</label>
+			    	<ol id="locations"></ol>
+			    </div>
+			    
+			    
+			  </section>
+
+			  
+			  <section id='s-6'>
+			    <h2>Make A Suggestion</h2>
+			    <p>Put out a theory on who done it</p>
+			    <div id="suggestion">
+			    	<p>Here is where you make a suggestion.  Your choices will be dependent on the cards that you currently have or have seen.  The room of choice will always be the room you are in.  If you would like to choose a different room, you will have to travel to that room. Once a suggestion has been made, the next player will check the cards that they have.  If they have one of the cards that you suggest, it will be shown to you and your checklist will be updated. Once you have been shown a card, no other players have to disprove your suggestion.  If the next player doesn't have a card, your suggestion passes to next player and so on. You will be required to choose a card to show to your opposition when they make a suggestion, should your turn be next or the player before you has none of the cards.  If you choose to make a suggestion or accusation in the future, the choices you have remaining will be reflected.  Any cards shown to you will show up in your checklist as orange.  Use suggestions to narrow down the potential suspects to figure out who was murdered.  Remember though, there are others trying to solve the murder as well.  Be smart, cunning and fast.</p>
+			    </div>  
+			    <div id="sugg"><h3>Who do you think did it?</h3></div>
+			    
+			  </section>
+			  
+			  <section id='s-7'>
+			    <h2>Make Accusation</h2>
+			    <p>If you know who did it, you're in the right place</p>
+			  </section>
+
+			  <section id='s-8'>
+			    <h2>End Turn</h2>
+			    <p>It might be your last!!!!</p>
+			    <!-- ENTER BUTTON HERE -->
+			  </section>
+			  
+			  <section id='s-9'>
+			    <h2>Quit</h2>
+			    <p>Tired of playing?</p>
+			  </section>
+			  
+			  <section id='s-10'>
+			    <h2>About</h2>
+			    <p></p>
+			    <p>I built this game using solely custom CSS, Bootstrap, JavaScript and jQuery. I also used an A* pathfinder algorithm to make AI move intelligently. I decided to build Clue because I'm a bit nostalgic, but also because it required a lot of logic that I wanted to work through.  It has been an awesome challenge and I hope you enjoy it!</p>
+			    <p>The patterns used on the background, paper, and leather are modified from <a href='http://subtlepatterns.com'/>Subtle Patterns</a>. The notepad css and tabs are from a theme by <a href='http://megandalbey.com'>http://megandalbey.com</a>. Other than that, the rest is mine.  If you like my game, feel free to view more of my work at <a href='http://forlorne.us'>http://forlorne.us</a></p>
+			  </section>
+			</article>
+			</div></div><!--end leather-->
+		</div><!--end col 5-->
+
+		<div class="col-md-7">
+			<div id="clueRoom"></div>
+			<table></table>
+		</div>
+
+	</div> <!--end row-->
+</div><!--end container-->
+
+<!-- BEGIN START GAME MODAL -->
+
+<div class="modal fade" id="newGame" tabindex="-1" role="dialog" 
+	     aria-labelledby="myNewGame" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Get Started
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">   
+                <!-- <form id="manyPlayer"> -->
+                	<label>Please Select Number of Players</label>
+                	<select id="playerSelect" class="selectpicker form-control" data-live-search="true" name="playerSelect">
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				      <option>6</option>
+				    </select>
+            		<br>
+            		<label>Please Select Your Character</label>
+            		<select id="characterSelect" class="selectpicker form-control" data-live-search="true" name="characterSelect">	
+				    </select>
+				    <br>
+                <!-- </form>  -->
+                  <button data-dismiss="modal" class="btn btn-success" id="begin">Begin Game</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- END START GAME MODAL -->
+<!-- BEGIN SUGGESTION/ACCUSATION MODAL -->
+
+<div class="modal fade" id="sugAcc" tabindex="-1" role="dialog" 
+	     aria-labelledby="mySugAcc" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="mySugAcc">
+                    Make Suggestion
+                </h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">   
+        		<label id='charsugg'>Suggest a Character</label>
+        		<select id="suggChar" class="selectpicker form-control" data-live-search="true" name="suggChar">	
+			    </select>
+			    <br>
+			    <label id='weapsugg'>Suggest a Weapon</label>
+        		<select id="suggWeap" class="selectpicker form-control" data-live-search="true" name="suggWeap">	
+			    </select>
+			    <br>
+			    <label id='roomsugg'>Suggest a Room</label>
+        		<select id="suggRoom" class="selectpicker form-control" data-live-search="true" name="suggRoom">	
+			    </select>
+			    <br>
+                <button data-dismiss="modal" class="btn btn-success" id="suggSub">Make Suggestion</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- END SUGGESTION/ACCUSATION MODAL -->
+<!-- BEGIN DISPLAY MODAL -->
+
+<div class="modal fade" id="displayModal" tabindex="-1" role="dialog" 
+	     aria-labelledby="myDisplayTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myDisplayTitle"></h4>
+            </div>
+            <div class="modal-body" id="displayBody">
+            	<div id="card"></div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<!-- END DISPLAY MODAL -->
+
+<!-- BEGIN OPTIONS MODAL -->
+
+<div class="modal fade" id="optionModal" tabindex="-1" role="dialog" 
+	     aria-labelledby="myOptionTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myOptionTitle"></h4>
+            </div>
+            <div class="modal-body" id="optionBody">
+         
+            </div> 
+        </div>
+    </div>
+</div>
+
+<!-- END OPTIONS MODAL -->
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="js/clueMap.js"></script>
+<script src="js/clue.js"></script>
+	
+</body>
+</html>
