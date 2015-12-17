@@ -25,32 +25,32 @@ var dicefaces = [
 var characters = [
 	{ 
 		"name": "Professor Plum", 
-		"imgPath": "/img/clue/plum.jpg",
+		"imgPath": "/img/plum.jpg",
 		"class": 'plum'
 	},
 	{ 
 		"name": "Colonel Mustard", 
-		"imgPath": "/img/clue/mustard.jpg",
+		"imgPath": "/img/mustard.jpg",
 		"class": 'mustard'
 	},
 	{ 
 		"name": "Miss Scarlet", 
-		"imgPath": "/img/clue/scarlet.jpg",
+		"imgPath": "/img/scarlet.jpg",
 		"class": 'scarlet'
 	},
 	{ 
 		"name": "Mr. Green", 
-		"imgPath": "/img/clue/green.jpg",
+		"imgPath": "/img/green.jpg",
 		"class": 'green'
 	},
 	{ 
 		"name": "Mrs. White", 
-		"imgPath": "/img/clue/white.jpg",
+		"imgPath": "/img/white.jpg",
 		"class": 'white'
 	},
 	{ 
 		"name": "Mrs. Peacock", 
-		"imgPath": "/img/clue/peacock.jpg",
+		"imgPath": "/img/peacock.jpg",
 		"class": 'peacock'
 	}	
 ]
@@ -58,89 +58,89 @@ var characters = [
 var weapons = [
 	{ 
 		"name": "Rope", 
-		"imgPath": "/img/clue/rope.jpg"
+		"imgPath": "/img/rope.jpg"
 	},
 	{ 
 		"name": "Pipe", 
-		"imgPath": "/img/clue/pipe.jpg"
+		"imgPath": "/img/pipe.jpg"
 	},
 	{ 
 		"name": "Knife", 
-		"imgPath": "/img/clue/knife.jpg"
+		"imgPath": "/img/knife.jpg"
 	},
 	{ 
 		"name": "Wrench", 
-		"imgPath": "/img/clue/wrench.jpg"
+		"imgPath": "/img/wrench.jpg"
 	},
 	{ 
 		"name": "Candlestick", 
-		"imgPath": "/img/clue/candlestick.jpg"
+		"imgPath": "/img/candlestick.jpg"
 	},
 	{ 
 		"name": "Pistol", 
-		"imgPath": "/img/clue/pistol.jpg"
+		"imgPath": "/img/pistol.jpg"
 	}	
 ]
 
 var cardRooms = [
 	{ 
 		"name": "Study", 
-		"displayImg": "/img/clue/study1.jpg",
-		"imgPath": "/img/clue/roomstudy.jpg",
+		"displayImg": "/img/study1.jpg",
+		"imgPath": "/img/roomstudy.jpg",
 		"secret": "studykitchen",
 		"secretSq": ["sq72","sq570"], 
 		"doors": [78]
 	},
 	{ 
 		"name": "Library",
-		"imgPath": "/img/clue/roomlibrary.jpg", 
-		"displayImg": "/img/clue/library2.jpg",
+		"imgPath": "/img/roomlibrary.jpg", 
+		"displayImg": "/img/library2.jpg",
 		"doors": [198, 243]
 	},
 	{ 
 		"name": "Billiard",
-		"imgPath": "/img/clue/roombilliard.jpg", 
-		"displayImg": "/img/clue/billiard.jpg",
+		"imgPath": "/img/roombilliard.jpg", 
+		"displayImg": "/img/billiard.jpg",
 		"doors": [289, 365]
 	},
 	{ 
 		"name": "Conservatory",
-		"imgPath": "/img/clue/roomconservatory.jpg", 
-		"displayImg": "/img/clue/conservatory.jpg",
+		"imgPath": "/img/roomconservatory.jpg", 
+		"displayImg": "/img/conservatory.jpg",
 		"secret": "conservatorylounge", 
 		"secretSq":["sq457", "sq143"],
 		"doors": [460]
 	},
 	{ 
 		"name": "Hall",
-		"imgPath": "/img/clue/roomhall.jpg", 
-		"displayImg": "/img/clue/hall.jpg", 
+		"imgPath": "/img/roomhall.jpg", 
+		"displayImg": "/img/hall.jpg", 
 		"doors": [105, 155, 156]
 	},
 	{ 
 		"name": "Ballroom",
-		"imgPath": "/img/clue/roomballroom.jpg", 
-		"displayImg": "/img/clue/ballroom2.jpg", 
+		"imgPath": "/img/roomballroom.jpg", 
+		"displayImg": "/img/ballroom2.jpg", 
 		"doors" : [464, 417, 422, 471]
 	},
 	{ 
 		"name": "Lounge",
-		"imgPath": "/img/clue/roomlounge.jpg", 
-		"displayImg": "/img/clue/lounge.jpg",
+		"imgPath": "/img/roomlounge.jpg", 
+		"displayImg": "/img/lounge.jpg",
 		"secret": "conservatorylounge", 
 		"secretSq":["sq143","sq457"],
 		"doors": [137]
 	},
 	{ 
 		"name": "Dining",
-		"imgPath": "/img/clue/roomdining.jpg", 
-		"displayImg": "/img/clue/dining2.jpg", 
+		"imgPath": "/img/roomdining.jpg", 
+		"displayImg": "/img/dining2.jpg", 
 		"doors": [304, 233]
 	},
 	{ 
 		"name": "Kitchen",
-		"imgPath": "/img/clue/roomkitchen.jpg", 
-		"displayImg": "/img/clue/kitchen.jpg",
+		"imgPath": "/img/roomkitchen.jpg", 
+		"displayImg": "/img/kitchen.jpg",
 		"secret": "studykitchen",
 		"secretSq":["sq570", "sq72"], 
 		"doors": [451]
