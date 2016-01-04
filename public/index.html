@@ -14,16 +14,16 @@
 			<div class='leather'><div class='leather-stitch'>
 			  <ul class='rings'><li></li><li></li><li></li></ul>
 			  <ul class='tabs'>
-			    <li id='t-1' class='current'>New Game</li>
-			    <li id='t-2' class=''>Instructions</li>
-			    <li id='t-3' class=''>Roll Dice</li>
-			    <li id='t-4' class=''>Game Log</li>
-			    <li id='t-5' class=''>View Checklist</li>
-			    <li id='t-6' class=''>Make Suggestion</li>
-			    <li id='t-7' class=''>Make Accusation</li>
-			    <li id='t-8' class=''>End Turn</li>
-			    <li id='t-9' class=''>Quit</li>
-			    <li id='t-10' class=''>About</li>
+			    <li id='t-1' class='current newGame'>New Game</li>
+			    <li id='t-2' class=''>Rules</li>
+			    <li id='t-3' class='userTurn rollDice'>Roll Dice</li>
+			    <li id='t-4' class='cpuTurn'>Game Log</li>
+			    <li id='t-5' class='userTurn'>View Checklist</li>
+			    <li id='t-6' class='makeSugg'>Make Suggestion</li>
+			    <li id='t-7' class='makeAcc'>Make Accusation</li>
+			    <li id='t-8' class='userTurn'>End Turn</li>
+			    <li id='t-9' class='quit'>Quit</li>
+			    <li id='t-10' class='newGame'>About</li>
 			  </ul>
 			  
 			<article>
@@ -100,7 +100,7 @@
 			  <section id='s-8'>
 			    <h2>End Turn</h2>
 			    <p>It might be your last!!!!</p>
-			    <!-- ENTER BUTTON HERE -->
+			    <h4 id="playerTurnOver">Click To End Turn</h4>
 			  </section>
 			  
 			  <section id='s-9'>
@@ -241,10 +241,13 @@
                         <span aria-hidden="true">&times;</span>
                         <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title" id="myOptionTitle"></h4>
+                <h4 class="modal-title" id="myOptionTitle">Select Card To Show</h4>
             </div>
             <div class="modal-body" id="optionBody">
-         
+         		<label>Pick Card</label>
+        		<select id="opChoice" class="selectpicker form-control" data-live-search="true"></select>
+        		<br>
+                <button data-dismiss="modal" class="btn btn-success" id="opSub">Show Card</button>
             </div> 
         </div>
     </div>

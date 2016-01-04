@@ -1,17 +1,6 @@
 var specials = ['gameBorder', 'doors', 'hallway', 'secret', 'start'];
 
-var rooms = [
-	"study",
-	"library",
-	"billiard",
-	"conservatory",
-	"hall",
-	"clue",
-	"ballroom", 
-	"lounge",
-	"dining",
-	"kitchen"
-];
+var rooms = ["study", "library", "billiard", "conservatory", "hall", "clue", "ballroom", "lounge", "dining", "kitchen"];
 
 function completeBoard(array, string){
 	$.each(array, function(i, item){
@@ -143,12 +132,10 @@ function gameBoard(){
 		$(square).attr("id", "sq" + i);
 		$(square).attr( "data-id", i );
 		$(square).addClass('hallway');
-		// $('#sq120').addClass("activePlayer");
-		// $(square).html(i);
 	})
 }
 
-// function to create grid
+// functions to create grid
 function yBoard(){
 	var rows = $('tr');
 	var j = 0;  
@@ -175,7 +162,7 @@ function coordinates(){
 	solosq.each(function(){
 		var x = $(this).attr("data-x");
 		var y = $(this).attr("data-y");
-		var xy = "" + x +"." + y + "";
+		var xy = "" + x +"by" + y + "";
 		$(this).addClass(xy);
 		// $(this).html(xy);  
 	})

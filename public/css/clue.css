@@ -24,6 +24,14 @@ td{
   color: red;
 }
 
+#playerTurnOver{
+  padding-left: 10px; 
+}
+
+#playerTurnOver:hover{
+  color: red;
+}
+
 .modal-body{
   background: url('http://megandalbey.com/codepen/css-selectors/paper.jpg') #f2f1e3;
 }
@@ -70,6 +78,12 @@ td{
   background-size: cover; 
 }
 
+.cards{
+  height: 380px;
+  width: 245px; 
+  border-radius: 7%;
+}
+
 #displayBody{
   padding-left: 27px;
 }
@@ -104,11 +118,7 @@ td{
 }
 
 .start{
-  background-color: brown;
-}
-
-.activePlayer{
-  /*background-color: red;*/
+  background-color: lightyellow;
 }
 
 .scarlet{
@@ -116,11 +126,11 @@ td{
 }
 
 .white{
-  background-color: lightgrey;
+  background-color: grey;
 }
 
 .green{
-  background-color: darkgreen;
+  background-color: #023104;
 }
 
 .mustard{

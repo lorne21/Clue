@@ -1,16 +1,14 @@
 // Game Variables
 
-// the world grid: a 2d array of tiles
+// the world grid: a 2d array
 var world = [[]];
-
-// size in the world in sprite tiles
 var worldWidth = 24;
 var worldHeight = 24;
-
 var time = 200; 
 var moves = 0; 
 var classes = ['mustard', 'plum', 'scarlet', 'peacock', 'green', 'white'];
-var currentPlayer; 
+var currentPlayer;
+var disprover;  
 var turn = 0; 
 
 var dicefaces = [
@@ -88,62 +86,62 @@ var cardRooms = [
 		"displayImg": "/img/study1.jpg",
 		"imgPath": "/img/roomstudy.jpg",
 		"secret": "studykitchen",
-		"secretSq": ["sq72","sq570"], 
-		"doors": [78]
+		"secretSq": ["#sq72","#sq570"], 
+		"doors": ["#sq78"]
 	},
 	{ 
 		"name": "Library",
 		"imgPath": "/img/roomlibrary.jpg", 
 		"displayImg": "/img/library2.jpg",
-		"doors": [198, 243]
+		"doors": ["#sq198", "#sq243"]
 	},
 	{ 
 		"name": "Billiard",
 		"imgPath": "/img/roombilliard.jpg", 
 		"displayImg": "/img/billiard.jpg",
-		"doors": [289, 365]
+		"doors": ["#sq289", "#sq365"]
 	},
 	{ 
 		"name": "Conservatory",
 		"imgPath": "/img/roomconservatory.jpg", 
 		"displayImg": "/img/conservatory.jpg",
 		"secret": "conservatorylounge", 
-		"secretSq":["sq457", "sq143"],
-		"doors": [460]
+		"secretSq":["#sq457", "#sq143"],
+		"doors": ["#sq460"]
 	},
 	{ 
 		"name": "Hall",
 		"imgPath": "/img/roomhall.jpg", 
 		"displayImg": "/img/hall.jpg", 
-		"doors": [105, 155, 156]
+		"doors": ["#sq105", "#sq155", "#sq156"]
 	},
 	{ 
 		"name": "Ballroom",
 		"imgPath": "/img/roomballroom.jpg", 
 		"displayImg": "/img/ballroom2.jpg", 
-		"doors" : [464, 417, 422, 471]
+		"doors" : ["#sq464", "#sq417", "#sq422", "#sq471"]
 	},
 	{ 
 		"name": "Lounge",
 		"imgPath": "/img/roomlounge.jpg", 
 		"displayImg": "/img/lounge.jpg",
 		"secret": "conservatorylounge", 
-		"secretSq":["sq143","sq457"],
-		"doors": [137]
+		"secretSq":["#sq143","#sq457"],
+		"doors": ["#sq137"]
 	},
 	{ 
 		"name": "Dining",
 		"imgPath": "/img/roomdining.jpg", 
 		"displayImg": "/img/dining2.jpg", 
-		"doors": [304, 233]
+		"doors": ["#sq304", "#sq233"]
 	},
 	{ 
 		"name": "Kitchen",
 		"imgPath": "/img/roomkitchen.jpg", 
 		"displayImg": "/img/kitchen.jpg",
 		"secret": "studykitchen",
-		"secretSq":["sq570", "sq72"], 
-		"doors": [451]
+		"secretSq":["#sq570", "#sq72"], 
+		"doors": ["#sq451"]
 	}	
 ];
 
@@ -167,6 +165,7 @@ var Player = function(name, type) {
   this.disprover = false;  
   this.lastSquare; 
   this.path = []; 
+  this.room = "";
 }
 
 // END GAME VARIABLES
@@ -299,32 +298,32 @@ function startColors(){
 	playerArray.forEach(function(player){
 		switch(player.name){
 			case 'Professor Plum': 
-				$(player.startSquare).addClass('plum');
+				$(player.lastSquare).addClass('plum');
 				player.color = 'plum';
 				player.colorCode = 'purple'; 
 				break;
 			case 'Colonel Mustard':
-				$(player.startSquare).addClass('mustard');
+				$(player.lastSquare).addClass('mustard');
 				player.color = 'mustard';
 				player.colorCode = '#FFDB58'; 
 				break;
 			case "Miss Scarlet":
-				$(player.startSquare).addClass('scarlet');
+				$(player.lastSquare).addClass('scarlet');
 				player.color = 'scarlet';
 				player.colorCode = '#cc0000'; 
 				break;
 			case "Mr. Green":
-				$(player.startSquare).addClass('green');
+				$(player.lastSquare).addClass('green');
 				player.color = 'green';
 				player.colorCode = 'darkgreen';
 				break;
 			case "Mrs. White":
-				$(player.startSquare).addClass('white');
+				$(player.lastSquare).addClass('white');
 				player.color = 'white';
 				player.colorCode = 'lightgrey'; 
 				break;
 			case "Mrs. Peacock":
-				$(player.startSquare).addClass('peacock');
+				$(player.lastSquare).addClass('peacock');
 				player.color = 'peacock';
 				player.colorCode = 'darkblue'; 
 				break; 
@@ -332,71 +331,7 @@ function startColors(){
 	})
 }
 
-// END START GAME FUNCTIONS
-
-// this function sets the current player
-function activeStart(){
-	currentPlayer = playerArray[turn];
-	var toActive = currentPlayer.lastSquare;
-	currentPlayer.active = true; 
-	$(toActive).addClass("activePlayer");
-}
-
-// this checks if the active player is human or not
-function checkPlayerType(){
-	if (currentPlayer.type == 'user'){
-		return true; 
-	} else {
-		return false; 
-	}
-}
-
-// CPU TURN FUNCTIONS
-
-// this function gets a number for the cpu player 
-function cpuRoll(){
-	var rand = Math.floor(Math.random()*12) + 1;
-	moves = rand; 
-	currentPlayer.hasRolled = true;
-	logThis('dice'); 
-	return moves; 
-}
-
-function getRoomArray(){
-	var roomArray = []; 
-	var cpuCards = currentPlayer.cards.concat(currentPlayer.oppcards);
-	cardRooms.forEach(function(room){
-		if ($.inArray(room, cpuCards == -1)){
-			roomArray.push(room); 
-		}
-	})
-	return roomArray; 
-}
-
-function pickRoom(array){
-	var rand = Math.floor(Math.random()* array.length);
-	var cpuRoom = array[rand];
-	console.log(cpuRoom);
-	currentPlayer.room = cpuRoom; 
-	return cpuRoom; 
-}
-
-function pickDoor(array){
-	var doorChoice, doorX, doorY;  
-	if (array.length > 1){
-		var rand = Math.floor(Math.random()* array.length);
-		doorChoice = array[rand];
-	} else {
-		doorChoice = array[0];
-	}  
-	doorX = doorChoice.attr("data-x");
-	doorY = doorChoice.attr("data-y");
-	doorCoords = [doorX, doorY]
-	return doorCoords; 
-}
-
-function createWorld()
-{
+function createWorld(){
   // create emptiness
   for (var x=0; x < worldWidth; x++)
   {
@@ -419,6 +354,48 @@ function createWorld()
   	}
   })
 }
+// END START GAME FUNCTIONS
+
+// this function sets the current player
+function activeStart(){
+	currentPlayer = playerArray[turn];
+	currentPlayer.active = true;  
+}
+
+// this checks if the active player is human or not
+function checkPlayerType(){
+	if (currentPlayer.type == 'user'){
+		return true; 
+	} else {
+		return false; 
+	}
+}
+
+// Movement Handlers
+function moveSquare(direction, current, color){
+	if($(direction).hasClass('hallway')){
+    	$(current).removeClass(color);
+    	$(direction).addClass(color);
+	} else if ($(direction).hasClass('doors')){ 
+    	$(current).removeClass(color);
+    	$(direction).addClass(color);
+    	setTimeout(function(){
+    		$(direction).animate({
+    			"background-color": "#ADD8E6",
+    			}, "slow")
+			moves = 0; 
+    		$('#movesAvail').html(moves);
+    	},500)
+    	logThis('enter');
+    	if (currentPlayer.type == 'user'){
+			setTimeout(function(){
+				room();
+			},2000) 
+    	}
+	}
+}
+
+// CPU TURN FUNCTIONS
 
 // BEGIN PATH ALGORITHM
 
@@ -590,7 +567,6 @@ function findPath(world,pathStart,pathEnd){
 	// that is empty if no path is possible
 	return calculatePath();
 }
-
 // END PATH ALGORITHM
 
 // TO CALL FUNCTION ABOVE 
@@ -604,14 +580,152 @@ function getPath(end){
 	currentPlayer.path = findPath(world,pathStart,pathEnd);
 }
 
-// this function gets the suggestion from the human player
-function suggestion(){   
-	var charChoice = $('#suggChar').val().toLowerCase();
-	var weapChoice = $('#suggWeap').val().toLowerCase();
-	var roomChoice = $('#suggRoom').val().toLowerCase();
-	playerArray[0].suggestionGuess = [charChoice, weapChoice, roomChoice];
+// this function gets a number for the cpu player 
+function cpuRoll(){
+	var rand = Math.floor(Math.random()*12) + 1;
+	moves = rand; 
+	currentPlayer.hasRolled = true;
+	logThis('dice');  
+	return moves; 
+}
 
-	// RUN FUNCTION HERE TO SEPARATE THE CPU AND USER CHOICE
+function getRoomArray(){
+	var roomArray = []; 
+	var cpuCards = currentPlayer.cards.concat(currentPlayer.oppcards);
+	cardRooms.forEach(function(room){
+		if ($.inArray(room, cpuCards) == -1){
+			roomArray.push(room); 
+		}
+	})
+	return roomArray; 
+}
+
+function pickRoom(array){
+	var cpuRoom; 
+	if (currentPlayer.room == ""){
+		var rand = Math.floor(Math.random()* array.length);
+		cpuRoom = array[rand];
+		currentPlayer.room = cpuRoom; 	
+	} else {
+		cpuRoom = currentPlayer.room; 
+	}
+	return cpuRoom.doors; 
+}
+
+function pickDoor(array){
+	var doorChoice, doorX, doorY;  
+	if (array.length > 1){
+		var rand = Math.floor(Math.random()* array.length);
+		doorChoice = array[rand];
+	} else {
+		doorChoice = array[0];
+	}  
+	doorX = parseInt($(doorChoice).attr("data-x"));
+	doorY = parseInt($(doorChoice).attr("data-y"));
+	doorCoords = [doorX, doorY]
+	return doorCoords; 
+}
+
+function makePath(){
+	var playerPath = currentPlayer.path; 
+	var newPath = [];
+	playerPath.forEach(function(square){
+		var squareId = "." + square[0] + "by" + square[1] + ""; 
+		newPath.push(squareId);
+	})
+	return newPath
+}
+
+function moveCPU(array){
+	var color = currentPlayer.color; 
+	var i=0; 
+	var animateInterval = setInterval(function(){
+		if(moves == 0){
+			clearInterval(animateInterval);
+			cpuStatus(); 
+		} 
+		var current = array[i];
+		var nextId = i + 1; 
+		var next = array[nextId];
+		moveSquare(next, current, color);
+		moves--; 
+		i++;
+	}, 500)
+	// var color = currentPlayer.color; 
+	// var i=0;
+	// var movesAllowed = moves - 1; 
+	// var animateInterval = setInterval(function(){
+	// 	if(i >= array.length){
+	// 		clearInterval(animateInterval);
+	// 		cpuStatus(); 
+	// 	} 
+	// 	var current = array[i];
+	// 	var nextId = i + 1; 
+	// 	var next = array[nextId];
+	// 	moveSquare(next, current, color);
+	// 	i++;
+	// }, 500)
+}
+
+function walkCPU(){
+	var arrayRoom = getRoomArray(); 
+	var pickedRoom = pickRoom(arrayRoom);
+	var pickedDoor = pickDoor(pickedRoom);
+	getPath(pickedDoor); 
+	var cpuPath = makePath(); 
+	moveCPU(cpuPath);
+}
+
+function cpuSuggChoice(array){
+	var choices = [];
+	var cpuPick;  
+	var allcards = currentPlayer.cards.concat(currentPlayer.oppcards);
+	array.forEach(function(item){
+		if ($.inArray(item, allcards) == -1){
+			choices.push(item.name); 
+		}
+	})
+	var rand = Math.floor(Math.random()*choices.length);
+	cpuPick = choices[rand]; 
+	return cpuPick;
+}
+
+function cpuStatus(){
+	if (checkEnd()){
+		endTurn();
+		setTimeout(function(){
+			startTurn(); 
+		},1000)
+	} else {
+		setTimeout(function(){
+			suggestion(); 
+			suggestionChooser();    
+		}, 2000)
+	}
+}
+
+function cpuTurn(){
+	// add if else about if in room with secret door
+	setTimeout(function(){
+		moves = cpuRoll(); 
+		setTimeout(function(){
+			walkCPU();    
+		}, 2000)
+	}, 2000)
+}
+// this function gets the suggestion from the human player
+function suggestion(){  
+	var charChoice, weapChoice, roomChoice;
+	if (currentPlayer.type == 'user'){
+		charChoice = $('#suggChar').val().toLowerCase();
+		weapChoice = $('#suggWeap').val().toLowerCase();
+		roomChoice = $('#suggRoom').val().toLowerCase();
+	} else {
+		charChoice = cpuSuggChoice(characters).toLowerCase();
+		weapChoice = cpuSuggChoice(weapons).toLowerCase();
+		roomChoice = currentPlayer.inRoom.toLowerCase(); 
+	}
+	currentPlayer.suggestionGuess = [charChoice, weapChoice, roomChoice];
 	logThis('suggestion'); 
 	suggArrayMaker(charChoice);
 	suggArrayMaker(weapChoice);
@@ -677,41 +791,34 @@ function nextPlayer(){
 
 // this function chooses a card to show
 function suggestionChooser(){
-	var cpuChoice; 
-	var playerToChoose = nextPlayer(); 
-	playerToChoose.disprover = true; 
-	logThis('disprover');
-	if (playerToChoose.type = "cpu"){
-		if (playerToChoose.suggestionArray.length > 1){
+	// var cpuChoice; 
+	disprover = nextPlayer();
+	disprover.disprover = true;  
+	if (disprover.type == "cpu"){
+		logThis('disprover');
+		if (disprover.suggestionArray.length > 1){
 			var rand = Math.floor(Math.random()*2);
-			cpuChoice = playerToChoose.suggestionArray[rand]; 
-			return cpuChoice; 
+			disprover.suggestionGuess = disprover.suggestionArray[rand];  
 		} else {
-			cpuChoice = playerToChoose.suggestionArray[0]; 
-			return cpuChoice; 
+			disprover.suggestionGuess = disprover.suggestionArray[0];  
 		}
-	} else if (playerToChoose.type = "user"){
+	} else if (disprover.type == "user"){
 		// INSERT FUNCTION USER CHOOSE CARD TO SHOW HERE
+		var userChoices = disprover.suggestionArray; 
+		$('#opChoice').html("");
+		userChoices.forEach(function(choice){
+			var idCard = 'card' + index; 
+			$('#opChoice').append("<option>" + choice.name + "</option>");
+		});
+		$('#optionModal').modal('show');
 	}
 }
 
 // this shows a card to the user
 function showCard(card){
-	var disprover;
-	var getsCard; 
-	playerArray.forEach(function(player){
-		if (player.active){
-			getsCard = player;
-		}
-	})
-	playerArray.forEach(function(player){
-		if (player.disprover){
-			 disprover = player; 
-		}
-	})
 	$('#myDisplayTitle').text(disprover.name + " has shown you a card.")
 	createCard(card.imgPath);
-	getsCard.oppcards.push(card); 
+	currentPlayer.oppcards.push(card); 
 	$('#displayModal').modal('show');
 	checkCards(); 
 }
@@ -763,7 +870,8 @@ function clearCardMessage(){
 
 function getRoomName(){
 	var enteredRoom; 
-	var where = $('.activePlayer').attr('class');
+	var charColor = "." + currentPlayer.color;
+	var where = $(charColor).attr('class');
 	var whereArray = where.split(" "); 
 	rooms.forEach(function(room){
 		if ($.inArray(room, whereArray) != -1){
@@ -783,6 +891,18 @@ function getRoomImage(name){
 	return roomImage; 
 }
 
+function getRoomCard(){
+	var name = $('#opChoice').val().toLowerCase();; 
+	var showCard; 
+	everycard.forEach(function(card){
+		var lowerCard = card.name.toLowerCase();
+		if (lowerCard == name){
+			showCard = card; 
+		}
+	})
+	return showCard; 
+}
+
 function showRoom(path){
 	$('#clueRoom').css('background', 'url(' + path + ')');
 	$('#clueRoom').css('background-size', 'cover');
@@ -793,7 +913,9 @@ function room(){
 	var roomname = getRoomName(); 
 	var imagePath = getRoomImage(roomname);
 	showRoom(imagePath);
-	tab(5);
+	$('.rollDice').hide('slow');
+	$('.makeSugg').show();	
+	tab(6);
 }
 
 function updateTurn(){
@@ -816,11 +938,41 @@ function resetPlayers(){
 }
 
 function endTurn(){
+	logThis('end');
+	var classColor = "." + currentPlayer.color;
+	currentPlayer.lastSquare = $(classColor); 
 	resetPlayers(); 
-	tab(9);
-	turn = updateTurn(); 
+	if (currentPlayer.type == 'user'){
+		tab(4);
+		$('.userTurn').hide(); 
+	}
+	turn = updateTurn();
 }
 
+function startTurn(){
+	activeStart(); 
+	logThis('turn');
+	if (currentPlayer.type == 'cpu'){
+		cpuTurn(); 
+	} else {
+		$('.userTurn').show('slow'); 
+		tab(3); 
+	}
+}
+
+function roomCheck(){
+	if (currentPlayer.inRoom != ""){
+
+	}
+}
+
+function checkEnd(){
+	if ((moves <= 0) && (currentPlayer.inRoom == "")){
+		return true;
+	} else {
+		return false; 
+	}
+}
 // this logs the various events of the game
 function logThis(play){
 	if (play == 'new'){
@@ -836,42 +988,36 @@ function logThis(play){
 		var oppString = opponents.join(", ");
 		$('#gameLog').append("<p>Your opponents are " + oppString + " and " + lastName + ".</p>"); 
 	} else if (play == 'dice'){
-		 playerArray.forEach(function(player){
-			if (player.active == true){
-				$('#gameLog').append("<p>" + player.name + " rolled a " + moves + ".</p>");
-			} 
-		})
+		$('#gameLog').append("<p>" + currentPlayer.name + " rolled a " + moves + ".</p>");
 	} else if (play == 'enter'){
 		var thisRoom = getRoomName();
-		playerArray.forEach(function(player){
-			if (player.active == true){
-				$('#gameLog').append("<p>" + player.name + " entered the " + thisRoom + ".</p>");
-				player.inRoom = thisRoom; 
-			} 
-		})
-
+		$('#gameLog').append("<p>" + currentPlayer.name + " entered the " + thisRoom + ".</p>");
+		currentPlayer.inRoom = thisRoom; 
 	} else if (play == 'suggestion'){
-		playerArray.forEach(function(player){
-			if (player.active == true){
-				$('#gameLog').append("<p>" + player.name + " suggests " + player.suggestionGuess[0] + " with the " + player.suggestionGuess[1] + " in the " + player.suggestionGuess[2] + ".</p>"); 
-			} 
-		})
+		$('#gameLog').append("<p>" + currentPlayer.name + " suggests " + currentPlayer.suggestionGuess[0] + " with the " + currentPlayer.suggestionGuess[1] + " in the " + currentPlayer.suggestionGuess[2] + ".</p>"); 
 	} else if (play == 'disprover'){
-		playerArray.forEach(function(player){
-			if (player.disprover == true){
-				$('#gameLog').append("<p>" + player.name + " has shown a card."); 
-			} 
-		})
+		$('#gameLog').append("<p>" + disprover.name + " has shown a card.");
+	} else if (play == 'turn'){
+		$('#gameLog').append("<p>It is " + currentPlayer.name + "'s turn.");
+	} else if (play == 'end'){
+		$('#gameLog').append("<p>" + currentPlayer.name + " ends turn.");
 	}
 
 }
 
 // Game Setup
 
+// tab hide show
 $(document).ready(function() {
 	createWorld(); 
+	$('.userTurn').hide();
+	$('.makeAcc').hide(); 
+	$('.makeSugg').hide();
+	$('.cpuTurn').hide();  
+	$('.quit').hide(); 
 });
 
+// checkbox creator
 $(document).ready(function() {
 	generateCheckbox();
 	$('#movesAvail').html(moves); 
@@ -897,12 +1043,14 @@ $(document).ready(function() {
 		dealCards(weapons);
 		dealCards(cardRooms);
 		checkCards();
-		activeStart();  
-		// console.log(playerArray); 
-		$("#t-1").hide('slow');
+		activeStart();   
+		$(".newGame").hide('slow');
+		$(".userTurn").show('slow');
+		$(".cpuTurn").show('slow');
+		$(".quit").show('slow'); 
 		logThis('new');
-
-		tab(8);
+		logThis('turn');
+		tab(3);
 		e.preventDefault();
 	});
 });
@@ -916,9 +1064,23 @@ $("#sugg").click(function(e) {
 // this handles submit of a suggestion
 $("#suggSub").click(function(e){
 	suggestion(); 
-	var cpuPlayerChoice = suggestionChooser(); 
+	suggestionChooser(); 
+	var cpuPlayerChoice = disprover.suggestionGuess; 
 	showCard(cpuPlayerChoice); 
-	tab(10);	
+	$('.makeSugg').hide('slow');
+	$('#clueRoom').slideUp('slow');
+	tab(8);	
+})
+
+// this handles submit of a cpu suggestion
+$("#opSub").click(function(e){
+	var userPlayerChoice = getRoomCard(); 
+	currentPlayer.oppcards.push(userPlayerChoice);
+	logThis('disprover'); 
+	setTimeout(function(){
+		cpuStatus();    
+	}, 1000)
+
 })
 
 // this shows a card from checklist
@@ -927,6 +1089,10 @@ $(document).on('click', '.show', function(e) {
 	clearCardMessage(); 
 	createCard(that);
 	$('#displayModal').modal('show');
+})
+
+$(document).on('click', '#clueRoom', function(e){
+	$('#clueRoom').slideUp('slow'); 
 })
 
 // Tab Handlers
@@ -938,50 +1104,17 @@ $('.tabs li').click(function tabbers(){
   $('#s-'+id[1]).addClass('current');
 });
 
-// Movement Handlers
-function moveSquare(direction, current, color){
-	if($(direction).hasClass('hallway')){
-		$(current).removeClass("activePlayer");
-    	$(direction).addClass("activePlayer");
-    	$(current).removeClass(color);
-    	$(direction).addClass(color);
-	} else if ($(direction).hasClass('doors')){
-		$(current).removeClass("activePlayer");
-    	$(direction).addClass("activePlayer"); 
-    	$(current).removeClass(color);
-    	$(direction).addClass(color);
-    	setTimeout(function(){
-    		$(direction).animate({
-    			"background-color": "#ADD8E6",
-    			}, "slow")
-			moves = 0; 
-    		$('#movesAvail').html(moves);
-    	},500)
-    	logThis('enter');
-    	setTimeout(function(){
-    		room();
-    	},2000) 
-		// insert function to handle room here
-	}
-}
-
-// this gets the class of a square
-function getCharClass(square){
-	var toChange; 
-	classes.forEach(function(charClass){
-		if($(square).hasClass(charClass)){
-			toChange = charClass; 
-		}
-	})
-	return toChange;
-}
+$('#playerTurnOver').click(function(){
+	endTurn(); 
+	startTurn(); 
+})
 
 // this handles moving the square
 $(document).keydown(function(e){ 
-    var active = $('.activePlayer'); 
+	var classColor = "." + currentPlayer.color;
+    var active = $(classColor); 
     var activeNum = $(active).data('id');
-    var activeSq = "#sq" + activeNum;
-    var charColor = getCharClass(activeSq); 
+    var charColor = currentPlayer.color; 
     var left = "#sq" + (activeNum - 1); 
     var right = "#sq" + (activeNum + 1);
     var up =  "#sq" + (activeNum - 24);
@@ -991,21 +1124,37 @@ $(document).keydown(function(e){
 			moveSquare($(left), active, charColor)
 			moves--;
 			$('#movesAvail').html(moves); 
+			if (checkEnd()){
+				$('.rollDice').hide('slow'); 
+				tab(8);
+			}
 			e.preventDefault();
 		} else if (e.keyCode == 39) { // right
 		    moveSquare($(right), active, charColor)
 		    moves--;
 		    $('#movesAvail').html(moves);
+		    if (checkEnd()){
+		    	$('.rollDice').hide('slow');
+				tab(8);
+			}
 			e.preventDefault();
 		} else if (e.keyCode == 38) { // up
 		    moveSquare($(up), active, charColor)
 		    moves--;
 		    $('#movesAvail').html(moves);
+		    if (checkEnd()){
+		    	$('.rollDice').hide('slow');
+				tab(8);
+			}
 			e.preventDefault();
 		} else if (e.keyCode == 40) { // down
 		    moveSquare($(down), active, charColor)
 		    moves--;
 		    $('#movesAvail').html(moves);
+		    if (checkEnd()){
+		    	$('.rollDice').hide('slow');
+				tab(8);
+			}
 			e.preventDefault();
 		}
     }
@@ -1014,28 +1163,30 @@ $(document).keydown(function(e){
 //this rolls the dice FOR USER ONLY. 
 	
 $('#roll').click(function sides(){	
-	// if (currentPlayer.hasRolled == false){
-	// 	setTimeout(function(){
-	// 		var rand = Math.floor(Math.random()*6);
-	// 		var rand2 = Math.floor(Math.random()*6);
-	// 		$('#die1').html(dicefaces[rand]);
-	// 		$('#die2').html(dicefaces[rand2]); 
-	// 		if (time < 800){
-	// 			time += 71; 
-	// 			sides(); 
-	// 		} else if (time > 800){
-	// 			time = 200;
-	// 			var rolled1 = rand + 1;  
-	// 			var rolled2 = rand2 + 1; 
-	// 			moves = rolled1 + rolled2; 
-	// 			$('#movesAvail').html(moves);
-	// 			currentPlayer.hasRolled = true; 
-	// 			logThis('dice');
-	// 		}
-	// 	}, time)
-	// }
-	moves = 12; 
-	$('#movesAvail').html(moves);
+	if (currentPlayer.hasRolled == false){
+		setTimeout(function(){
+			var rand = Math.floor(Math.random()*6);
+			var rand2 = Math.floor(Math.random()*6);
+			$('#die1').html(dicefaces[rand]);
+			$('#die2').html(dicefaces[rand2]); 
+			if (time < 800){
+				time += 71; 
+				sides(); 
+			} else if (time > 800){
+				time = 200;
+				var rolled1 = rand + 1;  
+				var rolled2 = rand2 + 1; 
+				moves = rolled1 + rolled2; 
+				$('#movesAvail').html(moves);
+				currentPlayer.hasRolled = true; 
+				logThis('dice');
+			}
+		}, time)
+	}
+	// currentPlayer.hasRolled = true;
+	// moves = 12; 
+	// $('#movesAvail').html(moves);
+
 })
 // End Movement Handlers
 
